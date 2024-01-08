@@ -1,0 +1,24 @@
+{
+    "name": "webmob/customer",
+    "description": "Add Fields on Customer Account Page for Magento 2",
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "php": "~7.0.13||~7.1.0||~7.2.0||~7.3.0||~7.4.0||~8.0.0||~8.1.0"
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Custom\\Customer\\": ""
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rz0705/Add-Fields-on-Customer-Account-Page-for-Magento-2.git"
+        }
+    ]    
+}

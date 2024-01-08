@@ -1,0 +1,389 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+    $connection = $objectManager->get(\Magento\Framework\App\ResourceConnection::class)
+            ->getConnection();
+
+    // Replace 'value' with the actual attribute code
+    $attributeCodeBusinessName = 'business_name';
+    $attributeCodeBusinessEmail = 'business_email';
+    $attributeCodeBusinessAddress = 'business_address';
+    $attributeCodeBusinessCity = 'business_city';
+    $attributeCodeProvinceState = 'province_state';
+    $attributeCodePostalZipCode = 'postal_zip_code';
+    $attributeCodePhoneNumber = 'business_phone_number';
+    $attributeCodeWebsite = 'website';
+    $attributeCodeBusinessType = 'business_type';
+    $attributeCodeHearAboutUs = 'hear_about_us';
+
+    // Fetch the Business Name attribute value from the database
+    $selectBusinessName = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'business_name')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+
+    $businessNameValue = $connection->fetchOne($selectBusinessName);
+
+    // Fetch the Business Email attribute value from the database
+    $selectBusinessEmail = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'business_email')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $businessEmailValue = $connection->fetchOne($selectBusinessEmail);
+
+    // Fetch the Business Address attribute value from the database
+    $selectBusinessAddress = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'business_address')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $businessAddressValue = $connection->fetchOne($selectBusinessAddress);
+
+    // Fetch the City attribute value from the database
+    $selectCity = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'business_city')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $cityValue = $connection->fetchOne($selectCity);
+
+    // Fetch the Province/State attribute value from the database
+    $selectProvinceState = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'province_state')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $provinceStateValue = $connection->fetchOne($selectProvinceState);
+
+    // Fetch the Postal/ZipCode attribute value from the database
+    $selectPostalZipCode = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'postal_zip_code')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $postalZipCodeValue = $connection->fetchOne($selectPostalZipCode);
+
+    // Fetch the Phone Number attribute value from the database
+    $selectPhoneNumber = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'business_phone_number')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $phoneNumberValue = $connection->fetchOne($selectPhoneNumber);
+
+    // Fetch the Website attribute value from the database
+    $selectWebsite = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'website')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $websiteValue = $connection->fetchOne($selectWebsite);
+
+    // Fetch the Business Type attribute value from the database
+    $selectBusinessType = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'business_type')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $businessTypeValue = $connection->fetchOne($selectBusinessType);
+
+    // Fetch the Hear About Us attribute value from the database
+    $selectHearAboutUs = $connection->select()
+    ->from(['eav' => 'customer_entity_varchar'], ['value'])
+    ->join(
+        ['attribute' => 'eav_attribute'],
+        'eav.attribute_id = attribute.attribute_id',
+        ['attribute_code']
+    )
+    ->where('attribute.attribute_code = ?', 'hear_about_us')
+    ->where('eav.entity_id = ?', $customerSession->getCustomer()->getId());
+    $hearAboutUsValue = $connection->fetchOne($selectHearAboutUs);
+?>
+
+<style>
+    .field {
+        width: 100%;
+        float: left;
+        padding: 0 10px;
+    }
+
+    .field:has(.business_name, .business_email, .business_address, .business_city, .province_state, .postal_zip_code, .business_phone_number, .website) {
+        width: 50%;
+        float: left;
+    }
+
+    .customer-account-login .actions-toolbar,
+    .customer-account-create .actions-toolbar {
+        display: block !important;
+        margin-top: 2px;
+    }
+
+    .required.star::after {
+        color: red;
+        content: " *";
+    }
+
+    .actions-toolbar{
+        padding-top: 10px;
+    }
+</style>
+
+<script>
+    require([
+        'jquery',
+        'jquery/ui',
+        'mage/validation'
+    ], function ($) {
+        // ZIP code validation
+        $.validator.addMethod(
+            'validate-zip-code',
+            function (value) {
+                // Check if the value is numeric and has a minimum length of 5
+                return /^\d{5,}$/.test(value);
+            },
+            $.mage.__(
+                'Please enter a valid postal/zip code with a minimum of 5 digits and only numeric characters.'
+                )
+        );
+
+        // Phone number validation
+        $.validator.addMethod(
+            'validate-us-phone',
+            function (value) {
+                // Check if the value is a valid US phone number
+                return /^(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/.test(value);
+            },
+            $.mage.__('Please enter a valid phone number.')
+        );
+
+        // Website URL validation
+        $.validator.addMethod(
+            'validate-website',
+            function (value) {
+                // Allow an empty value or a valid website URL
+                return value === '' ||
+                    /^(https?:\/\/)?([a-zA-Z0-9-]+\.){1,}([a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;%=]*)?$/
+                    .test(value);
+            },
+            $.mage.__('Please enter a valid website URL.')
+        );
+
+        // Business email validation
+        $.validator.addMethod(
+            'validate-business-email',
+            function (value) {
+                // Check if the value contains '@' and '.'
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            },
+            $.mage.__('Please enter a valid business email address.')
+        );
+
+        // City validation (no numbers)
+        $.validator.addMethod(
+            'validate-city',
+            function (value) {
+                // Check if the value contains no numeric characters
+                return !/\d/.test(value);
+            },
+            $.mage.__('City field should not contain numbers.')
+        );
+
+        return function (selectors) {
+            $.each(selectors, function (index, selector) {
+                $(selector).each(function () {
+                    var ruleName = $(this).data('validate-rule');
+                    if (ruleName) {
+                        $(this).addClass(ruleName);
+                    }
+                });
+            });
+
+            $('form[data-validate]').submit(function () {
+                if ($(this).valid()) {
+                    return true;
+                }
+                return false;
+            });
+        };
+    });
+</script>
+
+<div class="field" required>
+    <div class="business_name" required>
+        <label class="label" for="business_name">
+            <span>Business Name</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="business_name" id="business_name" value="<?= $businessNameValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Business Name')) ?>" class="input-text"
+                data-validate="{required:true}">
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="business_email" required">
+        <label class="label" for="business_email">
+            <span>Business Email</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="business_email" id="business_email" value="<?= $businessEmailValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Business Email')) ?>" class="input-text"
+                data-validate="{required:true, 'validate-email':true}">
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="business_address" required">
+        <label class="label" for="business_address">
+            <span>Business Address</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="business_address" id="business_address" value="<?= $businessAddressValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Business Address')) ?>" class="input-text"
+                data-validate="{required:true}">
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="business_city" required">
+        <label class="label" for="business_city">
+            <span>City</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="business_city" id="business_city" value="<?= $cityValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('City')) ?>" class="input-text" data-validate="{required:true}">
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="province_state" required">
+        <label class="label" for="province_state">
+            <span>Provience/State</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="province_state" id="province_state" value="<?= $provinceStateValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Provience/State')) ?>" class="input-text"
+                data-validate="{required:true}">
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="postal_zip_code" required>
+        <label class="label" for="postal_zip_code">
+            <span>Postal/Zip Code</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="postal_zip_code" id="postal_zip_code" value="<?= $postalZipCodeValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Postal/Zip Code')) ?>" class="input-text"
+                data-validate="{required:true, 'validate-zip-code':true}">
+            <div id="zip-code-error" class="mage-error" style="display:none;">Please enter a valid postal/zip code with
+                a minimum of 5 digits and only numeric characters.</div>
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="business_phone_number" required>
+        <label class="label" for="business_phone_number">
+            <span>Phone Number</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="business_phone_number" id="business_phone_number" value="<?= $phoneNumberValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>" class="input-text"
+                data-validate="{required:true, 'validate-us-phone':true}">
+            <div id="phone-number-error" class="mage-error" style="display:none;">Please enter a valid US phone number.
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="field">
+    <div class="website">
+        <label class="label" for="website">
+            <span>Website</span>
+        </label>
+        <div class="control">
+            <input type="text" name="website" id="website" value="<?= $websiteValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('Website')) ?>" class="input-text"
+                data-validate="{required:false, 'validate-website':true}">
+        </div>
+    </div>
+</div>
+
+<div class="field" required>
+    <div class="business_type" required">
+        <label class="label" for="business_type">
+            <span>What type of business do you have?</span>
+            <span class="star required"></span>
+        </label>
+        <div class="control">
+            <input type="text" name="business_type" id="business_type" value="<?= $businessTypeValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('What type of business do you have?')) ?>"
+                class="input-text" data-validate="{required:true}">
+        </div>
+    </div>
+</div>
+
+<div class="field"">
+    <div class="hear_about_us">
+        <label class="label" for="hear_about_us">
+            <span>How did you hear about us?</span>
+        </label>
+        <div class="control">
+            <input type="text" name="hear_about_us" id="hear_about_us" value="<?= $hearAboutUsValue; ?>"
+                title="<?= $block->escapeHtmlAttr(__('How did you hear about us?')) ?>" class="input-text"
+                data-validate="{required:false}"><br>
+        </div>
+    </div>
+</div>
