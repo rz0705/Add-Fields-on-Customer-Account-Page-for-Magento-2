@@ -49,5 +49,5 @@ Step-7: Flush Magento cache (remove all items from the cache)
 
 
 ```bash
-sudo php bin/magento c:f
+sudo php bin/magento cache:flush
 ```
