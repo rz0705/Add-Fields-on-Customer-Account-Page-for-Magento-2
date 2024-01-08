@@ -44,6 +44,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
         $attributeSetId = $eavSetup->getDefaultAttributeSetId(Customer::ENTITY);
         $attributeGroupId = $eavSetup->getDefaultAttributeGroupId(Customer::ENTITY);
 
+        // Add "business_name" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'business_name', [
                 'type' => 'varchar',
@@ -94,7 +95,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // Add "city" attribute
+        // Add "business_city" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'business_city', [
                 'type' => 'varchar',
@@ -111,7 +112,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // Add "city" attribute
+        // Add "province_state" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'province_state', [
                 'type' => 'varchar',
@@ -128,7 +129,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // Add "city" attribute
+        // Add "postal_zip_code" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'postal_zip_code', [
                 'type' => 'varchar',
@@ -145,7 +146,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // Add "city" attribute
+        // Add "business_phone_number" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'business_phone_number', [
                 'type' => 'varchar',
@@ -162,7 +163,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // Add "city" attribute
+        // Add "website" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'website', [
                 'type' => 'varchar',
@@ -179,7 +180,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // Add "city" attribute
+        // Add "business_type" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'business_type', [
                 'type' => 'varchar',
@@ -196,24 +197,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 'unique' => false,
             ]);
 
-        // // Add "business about" attribute
-        // $eavSetup->addAttribute(Customer::ENTITY, 
-        // 'business_about', [
-        //         'type' => 'varchar',
-        //         'label' => 'Briefly tell us a little bit about your business',
-        //         'input' => 'text',
-        //         'required' => true,
-        //         'visible' => true,
-        //         'user_defined' => true,
-        //         'sort_order' => 911, // Adjust the sort order as needed
-        //         'position' => 911, // Adjust the position as needed
-        //         'system' => 0,
-        //         'visible_in_grid' => true,
-        //         'visible_in_listing' => true,
-        //         'unique' => true,
-        //     ]);
-
-        // Add "here about us" attribute
+        // Add "hear_about_us" attribute
         $eavSetup->addAttribute(Customer::ENTITY, 
         'hear_about_us', [
                 'type' => 'varchar',
@@ -264,7 +248,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "business_city"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'business_city');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
@@ -275,7 +259,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "province_state"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'province_state');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
@@ -286,7 +270,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "postal_zip_code"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'postal_zip_code');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
@@ -297,7 +281,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "business_phone_number"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'business_phone_number');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
@@ -308,7 +292,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "website"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'website');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
@@ -319,7 +303,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "business_type"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'business_type');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
@@ -330,7 +314,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ]);
             $this->attributeResource->save($attribute);
 
-            // // Set attribute sets and groups for "city"
+            // // Set attribute sets and groups for "business_about"
             // $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'business_about');
             // $attribute->setAttributeSetId($attributeSetId);
             // $attribute->setAttributeGroupId($attributeGroupId);
@@ -341,7 +325,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             // ]);
             // $this->attributeResource->save($attribute);
 
-            // Set attribute sets and groups for "city"
+            // Set attribute sets and groups for "hear_about_us"
             $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, 'hear_about_us');
             $attribute->setAttributeSetId($attributeSetId);
             $attribute->setAttributeGroupId($attributeGroupId);
